@@ -1,4 +1,6 @@
 let provider;
+let oddSum = 0;
+let evenSum = 0;
 
 function checkOtherProviders(firstCardNumber) {
 
@@ -31,9 +33,31 @@ function checkCardLength(provider, cardNumber) {
     return flag;
 }
 
+
+const splitNumber = (number) => [...number.toString()].map((number) => number * 1);
+
+function sumValues(array) {
+    let sum = 0;
+
+    for (let i = 0; i < array.length; i++) {
+        sum += array[i];
+    }
+
+    return sum;
+}
+
 function verifyProvider(cardNumber) {
-    const firstNumber = cardNumber.substr(0, 2);
+    let cardSign = [];
     let flag = false;
+    let output;
+
+    for (let i = 0; i < cardNumber.length; i++) {
+        if (!isNaN(cardNumber[i] * 1) && cardNumber[i] != " ") cardSign.push(cardNumber[i]);
+    }
+
+    cardNumber = cardSign.join("");
+
+    const firstNumber = cardNumber.substr(0, 2);
 
     switch (firstNumber) {
 
@@ -49,8 +73,27 @@ function verifyProvider(cardNumber) {
             checkOtherProviders(firstNumber);
     }
 
-    console.log(checkCardLength(provider, cardNumber));
-    return checkCardLength(provider, cardNumber) ? provider : "Brak dostawcy karty";
+    const oddNumber = [...cardNumber].filter((value, index) => (++index % 2) > 0).map((value) => value * 2);
+
+    for (let i = 0; i < oddNumber.length; i++) {
+
+        if (oddNumber[i] > 9) {
+            const result = splitNumber(oddNumber[i]);
+
+            for (let i = 0; i < result.length; i++) {
+                oddNumber.push(result[i]);
+            }
+            oddNumber.splice(i, 1);
+            i--;
+        }
+    }
+
+    oddSum = sumValues(oddNumber);
+    evenSum = sumValues([...cardNumber].filter((value, index) => (++index % 2) == 0).map((value) => value * 1));
+
+    output = (evenSum + oddSum) % 10 === 0 ? "Numer karty poprawny. Wydał ją " : "Numer karty niepoprawny. Wydał ją ";
+    output += checkCardLength(provider, cardNumber) ? provider : "Brak karty";
+    return output;
 }
 
 export {
