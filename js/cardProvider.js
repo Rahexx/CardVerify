@@ -91,8 +91,8 @@ function verifyProvider(cardNumber) {
     oddSum = sumValues(oddNumber);
     evenSum = sumValues([...cardNumber].filter((value, index) => (++index % 2) == 0).map((value) => value * 1));
 
-    output = (evenSum + oddSum) % 10 === 0 ? "Numer karty poprawny. Wydał ją " : "Numer karty niepoprawny. Wydał ją ";
-    output += checkCardLength(provider, cardNumber) ? provider : "Brak karty";
+    output = (evenSum + oddSum) % 10 === 0 ? "Numer karty poprawny. " : "Numer karty niepoprawny. ";
+    output += checkCardLength(provider, cardNumber) ? ` Wydał ją: ${provider}` : "Nieprawidłowy";
     return output;
 }
 

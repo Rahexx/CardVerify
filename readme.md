@@ -33,13 +33,13 @@ CardVerify code by using
 ```
 before validation: 4874742091150666
 
-after validation: Numer karty poprawny. Wydał ją Visa
+after validation: Numer karty poprawny. Wydał ją: Visa
 
 
 
 before validation:  1 a 1 a
 
-after validation: Numer karty niepoprawny. Wydał ją Brak karty
+after validation: Numer karty niepoprawny. Nieprawidłowy
 ```
 
 ## Status
