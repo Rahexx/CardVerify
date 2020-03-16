@@ -18,15 +18,15 @@ function checkCardLength(provider, cardNumber) {
 
     switch (provider) {
         case "MasterCard":
-            cardNumber.length === 16 ? flag = true : flag = false;
+            flag = cardNumber.length === 16;
             break;
 
         case "Visa":
-            cardNumber.length === 16 || cardNumber.length === 13 ? flag = true : flag = false;
+            flag = cardNumber.length === 16 || cardNumber.length === 13;
             break;
 
         case "American Express":
-            cardNumber.length === 15 ? flag = true : flag = false;
+            flag = cardNumber.length === 15;
             break;
     }
 
@@ -34,7 +34,7 @@ function checkCardLength(provider, cardNumber) {
 }
 
 
-const splitNumber = (number) => [...number.toString()].map((number) => number * 1);
+const splitNumber = (number) => [...number.toString()].map((number) => Number(number));
 
 function sumValues(array) {
     let sum = 0;
